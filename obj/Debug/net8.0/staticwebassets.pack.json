@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\1839783\\ImageRecongnitionMQTT\\wwwroot\\images\\Image-0b4bd175-cef7-4c14-82ee-0a3fb9239914.png",
+      "PackagePath": "staticwebassets\\images\\Image-0b4bd175-cef7-4c14-82ee-0a3fb9239914.png"
+    },
+    {
+      "Id": "D:\\1839783\\ImageRecongnitionMQTT\\wwwroot\\images\\Image-84e57235-5d51-49b6-a921-8b680f95e852.png",
+      "PackagePath": "staticwebassets\\images\\Image-84e57235-5d51-49b6-a921-8b680f95e852.png"
+    },
+    {
+      "Id": "D:\\1839783\\ImageRecongnitionMQTT\\wwwroot\\images\\Image-89a1b023-8c7f-465e-859f-67c43e432176.png",
+      "PackagePath": "staticwebassets\\images\\Image-89a1b023-8c7f-465e-859f-67c43e432176.png"
+    },
+    {
+      "Id": "D:\\1839783\\ImageRecongnitionMQTT\\wwwroot\\images\\Image-b79c16cd-d598-4cb1-badb-95557f83757f.png",
+      "PackagePath": "staticwebassets\\images\\Image-b79c16cd-d598-4cb1-badb-95557f83757f.png"
+    },
+    {
+      "Id": "D:\\1839783\\ImageRecongnitionMQTT\\wwwroot\\images\\Image-d6033778-b01d-4ca0-9b4f-b1b030581e07.png",
+      "PackagePath": "staticwebassets\\images\\Image-d6033778-b01d-4ca0-9b4f-b1b030581e07.png"
+    },
+    {
+      "Id": "D:\\1839783\\ImageRecongnitionMQTT\\wwwroot\\images\\Image-f09550d7-632c-4439-aff9-d988efcb6bdb.png",
+      "PackagePath": "staticwebassets\\images\\Image-f09550d7-632c-4439-aff9-d988efcb6bdb.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ImageRecongnitionMQTT.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ImageRecongnitionMQTT.props",
+      "PackagePath": "build\\ImageRecongnitionMQTT.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ImageRecongnitionMQTT.props",
+      "PackagePath": "buildMultiTargeting\\ImageRecongnitionMQTT.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ImageRecongnitionMQTT.props",
+      "PackagePath": "buildTransitive\\ImageRecongnitionMQTT.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
