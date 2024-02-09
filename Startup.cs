@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using ImageRecognitionMQTT;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,9 +20,12 @@ public class Startup
         );
         services.AddControllers();
         // services.AddScoped<MarkerDetectionService>();
-        // services.AddScoped<BeamDetectionService> ();
+        services.AddScoped<BeamDetectionService>();
 
-
+        services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+});
         // Add other services and dependencies as needed
 
         // Configure other services as needed
@@ -48,7 +52,7 @@ public class Startup
         {
             // Configure production environment settings
         }
-    app.UseCors("AllowMyOrigin"); // Apply the CORS policy
+        app.UseCors("AllowMyOrigin"); // Apply the CORS policy
 
         app.UseRouting();
 

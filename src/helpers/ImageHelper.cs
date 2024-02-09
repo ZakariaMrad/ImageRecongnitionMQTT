@@ -43,6 +43,15 @@ public static class ImageHelper
         }
         SaveImage(mat, path);
     }
+    public static void DrawBeamMarkers(Mat mat, string path)
+    {
+        var markers = MarkerDetectionHelper.GetBeamMarkersAsModel(mat);
+        foreach (var marker in markers)
+        {
+            CvInvoke.Circle(mat, marker.Position.ToPoint(), 30, new MCvScalar(21, 163, 5), 10);
+        }
+        SaveImage(mat, path);
+    }
 
     public static ImageModel GetBase64(ImageModel image)
     {

@@ -14,10 +14,12 @@ namespace ImageRecognitionMQTT.Controllers
     public class ImagesController : ControllerBase
     {
         private readonly ImageRecognitionContext _context;
+        private readonly BeamDetectionService _beamDetectionService;
 
-        public ImagesController(ImageRecognitionContext context)
+        public ImagesController(ImageRecognitionContext context, BeamDetectionService beamDetectionService)
         {
             _context = context;
+            _beamDetectionService = beamDetectionService;
         }
 
         [HttpGet]
@@ -32,10 +34,10 @@ namespace ImageRecognitionMQTT.Controllers
                 {
                     return NotFound("No images found.");
                 }
-                return Ok(base64? ImageHelper.GetBase64(image) : image);
+                return Ok(base64 ? ImageHelper.GetBase64(image) : image);
             }
             var images = _context.GetImages();
-            return Ok(base64? ImageHelper.GetBase64(images) : images);
+            return Ok(base64 ? ImageHelper.GetBase64(images) : images);
         }
 
         [HttpPost]
@@ -47,6 +49,7 @@ namespace ImageRecognitionMQTT.Controllers
             }
 
             string IdImage = Guid.NewGuid().ToString();
+
             string path = Path.Combine("wwwroot", "images", IdImage + ".jpg");
             var image = new ImageModel
             {
@@ -54,16 +57,16 @@ namespace ImageRecognitionMQTT.Controllers
                 Path = path,
                 CreatedAt = DateTime.Now,
                 TakenBy = imageModel.TakenBy,
-                DeleteAt = DateTime.Now.AddSeconds(30)
+                DeleteAt = DateTime.Now.AddMinutes(5)
             };
 
             Mat mat = Base64Helper.ToMat(imageModel.AsBase64);
             ImageHelper.SaveImage(mat, path);
 
-            Task.Run(() =>
-            {
-                ImageHelper.DrawMarkers(mat, path);
-            });
+
+            _beamDetectionService.HandleBeams(mat);
+            ImageHelper.DrawMarkers(mat, path);
+            ImageHelper.DrawBeamMarkers(mat, path);
 
             _context.AddImage(image);
             _context.SaveChanges();

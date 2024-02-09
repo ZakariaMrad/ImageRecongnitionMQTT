@@ -1,56 +1,83 @@
-// using System.Drawing;
-// using Emgu.CV;
-// using Emgu.CV.Aruco;
-// using Emgu.CV.CvEnum;
-// using Emgu.CV.Structure;
-// using Emgu.CV.Util;
-// using ImageRecognitionMQTT.Enums;
+using System.Drawing;
+using Emgu.CV;
+using Emgu.CV.Aruco;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
+using Emgu.CV.Util;
+using ImageRecognitionMQTT.Enums;
+using MediaToolkit.Util;
 
 
-// public class BeamDetectionService
-// {
+public class BeamDetectionService
+{
+    private readonly ImageRecognitionContext _context;
 
-//     public BeamModel? DetectBeam(List<MarkerModel> markerModels, int Id)
-//     {
-//         try {
-//             //Keep only the markers that have the id of the beam
-//             var beamMarkers = markerModels.Where(m => m.Id == Id).ToList();
+    public BeamDetectionService(ImageRecognitionContext context)
+    {
+        _context = context;
+    }
 
-//             //If there are no markers with the id of the beam, return null
-//             if (beamMarkers.Count == 0) return null;
+    public void HandleBeams(Mat mat)
+    {
+        var markers = MarkerDetectionHelper.GetMarkersAsModel(mat);
+        var beamMarkers = MarkerDetectionHelper.GetBeamMarkersAsModel(mat);
+        var beams = new List<BeamModel>();
+        if (!FindBeam(beamMarkers, out beams))
+        {
+            Console.WriteLine("No beams found in the image");
+            return;
+        }
+        
+        beams.ForEach(beam =>
+        {
+            updateBeam(beam, beamMarkers,  markers);
 
-//             var beam = new BeamModel(Id, beamMarkers.Select(m => m.Position).ToList());
-//             return beam;
-//         } catch (System.Exception e) {
-//             Console.WriteLine(e);
-//             return null;
-//         }
-//     }
+        });
 
-//     public void WriteBeamOnImage(ImageModel image, BeamModel beam)
-//     {
-//         Mat matImage = CvInvoke.Imread(image.Path, ImreadModes.Color);
-//         //draw a lign between a marker and the next one
-//         CvInvoke.Line(matImage, beam.Markers[(int)BeamMarkers.TopLeft].ToPoint(), beam.Markers[(int)BeamMarkers.TopRight].ToPoint(), new MCvScalar(255, 0, 0), 2); // Red
-//         CvInvoke.Line(matImage, beam.Markers[(int)BeamMarkers.TopRight].ToPoint(), beam.Markers[(int)BeamMarkers.BottomRight].ToPoint(), new MCvScalar(0, 255, 0), 2); // Green
-//         CvInvoke.Line(matImage, beam.Markers[(int)BeamMarkers.BottomRight].ToPoint(), beam.Markers[(int)BeamMarkers.BottomLeft].ToPoint(), new MCvScalar(0, 0, 255), 2); // Blue
-//         CvInvoke.Line(matImage, beam.Markers[(int)BeamMarkers.BottomLeft].ToPoint(), beam.Markers[(int)BeamMarkers.TopLeft].ToPoint(), new MCvScalar(255, 255, 0), 2); // Yellow
 
-//         // Save the image
-//         CvInvoke.Imwrite(image.Path, matImage);
 
-//         Console.WriteLine("Beam written on image with path: " + image.Path);
-//     }
+    }
 
-//     public Mat DrawBeamOnImage(Mat matImage, BeamModel? beam)
-//     {
-//         if (beam == null) return matImage;
-//         //draw a lign between a marker and the next one
-//         CvInvoke.Line(matImage, beam.Markers[(int)BeamMarkers.TopLeft].ToPoint(), beam.Markers[(int)BeamMarkers.TopRight].ToPoint(), new MCvScalar(255, 0, 0), 2); // Red
-//         CvInvoke.Line(matImage, beam.Markers[(int)BeamMarkers.TopRight].ToPoint(), beam.Markers[(int)BeamMarkers.BottomRight].ToPoint(), new MCvScalar(0, 255, 0), 2); // Green
-//         CvInvoke.Line(matImage, beam.Markers[(int)BeamMarkers.BottomRight].ToPoint(), beam.Markers[(int)BeamMarkers.BottomLeft].ToPoint(), new MCvScalar(0, 0, 255), 2); // Blue
-//         CvInvoke.Line(matImage, beam.Markers[(int)BeamMarkers.BottomLeft].ToPoint(), beam.Markers[(int)BeamMarkers.TopLeft].ToPoint(), new MCvScalar(255, 255, 0), 2); // Yellow
+    private void updateBeam(BeamModel beam, List<MarkerModel> beamMarkers, List<MarkerModel> markers)
+    {
+        beam.UpdatedAt = DateTime.Now;
+        var cornerMarkers = beamMarkers.Where(marker => marker.IdMarker == beam.IdBeam).Select(marker => marker.ToCorner()).ToList();
+        if (cornerMarkers.Count != 4) {
+            Console.WriteLine("Beam # " + beam.IdBeam + " has more or less than 4 markers");
+            _context.UpdateBeam(beam);
+            return;
+        }
+        Console.WriteLine("Beam # " + beam.IdBeam + " has 4 markers");
+        beam.Corners.AddRange(cornerMarkers);
+        beam = addItems(beam, markers);
+        _context.UpdateBeam(beam);
 
-//         return matImage;
-//     }
-// }
+    }
+
+    private BeamModel addItems(BeamModel beam, List<MarkerModel> markers)
+    {
+        markers.ForEach(marker =>
+        {
+            if (GeometryHelper.IsPointInCorners(marker, beam.Corners))
+            {
+                Console.WriteLine("Marker # " + marker.IdMarker + " is inside beam # " + beam.IdBeam);
+            } else {
+                Console.WriteLine("Marker # " + marker.IdMarker + " is outside beam # " + beam.IdBeam);
+            }
+        });
+
+        return beam;
+    }
+
+    private bool FindBeam(List<MarkerModel> markers, out List<BeamModel> beams)
+    {
+        beams = _context.GetBeams();
+        if (beams == null)
+        {
+            return false;
+        }
+        beams = beams.Where(beam => markers.Any(marker => marker.IdMarker == beam.IdBeam)).ToList();
+        return beams.Count > 0;
+    }
+
+}

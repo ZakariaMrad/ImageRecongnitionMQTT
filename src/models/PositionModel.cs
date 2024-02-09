@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 public class PositionModel
 {
@@ -7,4 +8,8 @@ public class PositionModel
     public int X { get; set; }
     public int Y { get; set; }
 
+    public Point ToPoint()
+    {
+        return new Point(X, Y);
+    }
 }

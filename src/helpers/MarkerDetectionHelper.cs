@@ -7,13 +7,16 @@ public static class MarkerDetectionHelper
 {
     public static List<MarkerModel> GetMarkersAsModel(Mat mat)
     {
-        Dictionary dictionary = new Dictionary(Dictionary.PredefinedDictionaryName.Dict7X7_1000);
-        DetectorParameters parameters = DetectorParameters.GetDefault();
-        VectorOfInt ids = new VectorOfInt();
-        VectorOfVectorOfPointF corners = new VectorOfVectorOfPointF();
+        List<MarkerModel> MarkerList = GetMarkersAsModel(mat, Dictionary.PredefinedDictionaryName.Dict4X4_1000);
+        MarkerList.AddRange(GetMarkersAsModel(mat, Dictionary.PredefinedDictionaryName.Dict5X5_1000));
+        MarkerList.AddRange(GetMarkersAsModel(mat, Dictionary.PredefinedDictionaryName.Dict6X6_1000));
+        return MarkerList;
+    }
 
-        ArucoInvoke.DetectMarkers(mat, dictionary, corners, ids, parameters);
-        return MarkersToModel(ids, corners);
+    public static List<MarkerModel> GetBeamMarkersAsModel(Mat mat)
+    {
+        List<MarkerModel> MarkerList = GetMarkersAsModel(mat, Dictionary.PredefinedDictionaryName.Dict7X7_1000);
+        return MarkerList;
     }
 
     private static List<MarkerModel> MarkersToModel(VectorOfInt ids, VectorOfVectorOfPointF corners)
@@ -25,6 +28,17 @@ public static class MarkerDetectionHelper
             MarkerList.Add(marker);
         }
         return MarkerList;
+    }
+
+    public static List<MarkerModel> GetMarkersAsModel(Mat mat, Dictionary.PredefinedDictionaryName predefinedDictionaryName)
+    {
+        Dictionary dictionary = new Dictionary(predefinedDictionaryName);
+        DetectorParameters parameters = DetectorParameters.GetDefault();
+        VectorOfInt ids = new VectorOfInt();
+        VectorOfVectorOfPointF corners = new VectorOfVectorOfPointF();
+
+        ArucoInvoke.DetectMarkers(mat, dictionary, corners, ids, parameters);
+        return MarkersToModel(ids, corners);
     }
 
 }
