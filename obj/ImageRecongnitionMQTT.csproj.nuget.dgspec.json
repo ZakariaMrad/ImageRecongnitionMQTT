@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\1839783\\ImageRecongnitionMQTT\\ImageRecongnitionMQTT.csproj": {}
+    "C:\\Users\\Zakar\\CodingMac\\ImageRecongnitionMQTT\\ImageRecongnitionMQTT.csproj": {}
   },
   "projects": {
-    "D:\\1839783\\ImageRecongnitionMQTT\\ImageRecongnitionMQTT.csproj": {
+    "C:\\Users\\Zakar\\CodingMac\\ImageRecongnitionMQTT\\ImageRecongnitionMQTT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\1839783\\ImageRecongnitionMQTT\\ImageRecongnitionMQTT.csproj",
+        "projectUniqueName": "C:\\Users\\Zakar\\CodingMac\\ImageRecongnitionMQTT\\ImageRecongnitionMQTT.csproj",
         "projectName": "ImageRecongnitionMQTT",
-        "projectPath": "D:\\1839783\\ImageRecongnitionMQTT\\ImageRecongnitionMQTT.csproj",
-        "packagesPath": "C:\\Users\\Zakaria\\.nuget\\packages\\",
-        "outputPath": "D:\\1839783\\ImageRecongnitionMQTT\\obj\\",
+        "projectPath": "C:\\Users\\Zakar\\CodingMac\\ImageRecongnitionMQTT\\ImageRecongnitionMQTT.csproj",
+        "packagesPath": "C:\\Users\\Zakar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Zakar\\CodingMac\\ImageRecongnitionMQTT\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Zakaria\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Zakar\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,13 +38,29 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Accord.Video.FFMPEG": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
             "Emgu.CV": {
+              "target": "Package",
+              "version": "[4.8.1.5350, )"
+            },
+            "Emgu.CV.Bitmap": {
               "target": "Package",
               "version": "[4.8.1.5350, )"
             },
             "Emgu.CV.runtime.windows": {
               "target": "Package",
               "version": "[4.8.1.5350, )"
+            },
+            "FFmpeg.AutoGen": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            },
+            "MediaToolkit.NetCore": {
+              "target": "Package",
+              "version": "[0.2.1-preview, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
@@ -60,7 +70,17 @@
               "target": "Package",
               "version": "[8.0.1, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
             "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.1, )"
             },
@@ -92,7 +112,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

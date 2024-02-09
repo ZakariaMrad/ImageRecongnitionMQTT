@@ -1,28 +1,28 @@
 {
   "Files": [
     {
-      "Id": "D:\\1839783\\ImageRecongnitionMQTT\\wwwroot\\images\\Image-0b4bd175-cef7-4c14-82ee-0a3fb9239914.png",
-      "PackagePath": "staticwebassets\\images\\Image-0b4bd175-cef7-4c14-82ee-0a3fb9239914.png"
+      "Id": "C:\\Users\\Zakar\\CodingMac\\ImageRecongnitionMQTT\\wwwroot\\images\\318dee93-6980-4da8-8a44-25f70eff218b.jpg",
+      "PackagePath": "staticwebassets\\images\\318dee93-6980-4da8-8a44-25f70eff218b.jpg"
     },
     {
-      "Id": "D:\\1839783\\ImageRecongnitionMQTT\\wwwroot\\images\\Image-84e57235-5d51-49b6-a921-8b680f95e852.png",
-      "PackagePath": "staticwebassets\\images\\Image-84e57235-5d51-49b6-a921-8b680f95e852.png"
+      "Id": "C:\\Users\\Zakar\\CodingMac\\ImageRecongnitionMQTT\\wwwroot\\images\\5b6f4b0d-eb17-472d-ae76-b4d4f36869a2.jpg",
+      "PackagePath": "staticwebassets\\images\\5b6f4b0d-eb17-472d-ae76-b4d4f36869a2.jpg"
     },
     {
-      "Id": "D:\\1839783\\ImageRecongnitionMQTT\\wwwroot\\images\\Image-89a1b023-8c7f-465e-859f-67c43e432176.png",
-      "PackagePath": "staticwebassets\\images\\Image-89a1b023-8c7f-465e-859f-67c43e432176.png"
+      "Id": "C:\\Users\\Zakar\\CodingMac\\ImageRecongnitionMQTT\\wwwroot\\images\\5d0e1bae-dc8e-4119-bdb2-ae8a469eaee9.jpg",
+      "PackagePath": "staticwebassets\\images\\5d0e1bae-dc8e-4119-bdb2-ae8a469eaee9.jpg"
     },
     {
-      "Id": "D:\\1839783\\ImageRecongnitionMQTT\\wwwroot\\images\\Image-b79c16cd-d598-4cb1-badb-95557f83757f.png",
-      "PackagePath": "staticwebassets\\images\\Image-b79c16cd-d598-4cb1-badb-95557f83757f.png"
+      "Id": "C:\\Users\\Zakar\\CodingMac\\ImageRecongnitionMQTT\\wwwroot\\images\\5db1a748-d477-47e9-87fd-06cd9a59f43c.jpg",
+      "PackagePath": "staticwebassets\\images\\5db1a748-d477-47e9-87fd-06cd9a59f43c.jpg"
     },
     {
-      "Id": "D:\\1839783\\ImageRecongnitionMQTT\\wwwroot\\images\\Image-d6033778-b01d-4ca0-9b4f-b1b030581e07.png",
-      "PackagePath": "staticwebassets\\images\\Image-d6033778-b01d-4ca0-9b4f-b1b030581e07.png"
+      "Id": "C:\\Users\\Zakar\\CodingMac\\ImageRecongnitionMQTT\\wwwroot\\images\\a9548271-84f0-4460-80f4-c84e49267942.jpg",
+      "PackagePath": "staticwebassets\\images\\a9548271-84f0-4460-80f4-c84e49267942.jpg"
     },
     {
-      "Id": "D:\\1839783\\ImageRecongnitionMQTT\\wwwroot\\images\\Image-f09550d7-632c-4439-aff9-d988efcb6bdb.png",
-      "PackagePath": "staticwebassets\\images\\Image-f09550d7-632c-4439-aff9-d988efcb6bdb.png"
+      "Id": "C:\\Users\\Zakar\\CodingMac\\ImageRecongnitionMQTT\\wwwroot\\images\\ff72254c-5d2a-40a6-9642-727708d4c875.jpg",
+      "PackagePath": "staticwebassets\\images\\ff72254c-5d2a-40a6-9642-727708d4c875.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ImageRecongnitionMQTT.Microsoft.AspNetCore.StaticWebAssets.props",

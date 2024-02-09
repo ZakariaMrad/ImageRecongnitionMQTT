@@ -1,64 +1,72 @@
+using System.IO.Abstractions;
+using Emgu.CV;
+using MediaToolkit;
+using MediaToolkit.Model;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Net.Http.Headers;
 
 namespace ImageRecognitionMQTT.Controllers
 {
-
     [ApiController]
     [Route("api/[controller]")]
     public class ImagesController : ControllerBase
     {
-        private readonly ImageContext _context;
-        public ImagesController(ImageContext context)
+        private readonly ImageRecognitionContext _context;
+
+        public ImagesController(ImageRecognitionContext context)
         {
             _context = context;
         }
 
-        [HttpPost]
-        public IActionResult PostMarker([FromBody] ImageModel imageModel)
-        {
-            if (imageModel == null || imageModel.AsBase64 == null)
-            {
-                return BadRequest("Invalid image model.");
-            }
-
-            if (imageModel.Name == null)
-            {
-                imageModel.Name = "Image-" + Guid.NewGuid().ToString() + "." + Base64Helper.GetFileExtensionFromBase64(imageModel.AsBase64);
-            }
-
-            imageModel.Path = Path.Combine("wwwroot", "images", imageModel.Name);
-            Base64Helper.SaveFileFromBase64(imageModel.AsBase64, imageModel.Path);
-
-            imageModel.AsBase64 = null;
-
-            _context.Images.Add(imageModel);
-            _context.SaveChanges();
-            return Ok(imageModel);
-        }
-
         [HttpGet]
-        public IActionResult GetMarkers()
+        public IActionResult Getimages()
         {
             var latest = Request.Query["latest"].ToArray().Length != 0;
-            var images = _context.Images.ToList();
-
+            var base64 = Request.Query["base64"].ToArray().Length != 0;
             if (latest)
             {
-                images = images.OrderByDescending(i => i.Id).Take(1).ToList();
-
+                var image = _context.GetLatestImage();
+                if (image == null)
+                {
+                    return NotFound("No images found.");
+                }
+                return Ok(base64? ImageHelper.GetBase64(image) : image);
             }
-            return Ok(images);
+            var images = _context.GetImages();
+            return Ok(base64? ImageHelper.GetBase64(images) : images);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetMarker(int id)
+        [HttpPost]
+        public IActionResult createImage([FromBody] ImageModel? imageModel)
         {
-            var image = _context.Images.Find(id);
-            if (image == null)
+            if (imageModel == null || imageModel.AsBase64 == null || imageModel.TakenBy == "")
             {
-                return NotFound();
+                return BadRequest("Base64 and TakenBy are required.");
             }
+
+            string IdImage = Guid.NewGuid().ToString();
+            string path = Path.Combine("wwwroot", "images", IdImage + ".jpg");
+            var image = new ImageModel
+            {
+                IdImage = IdImage,
+                Path = path,
+                CreatedAt = DateTime.Now,
+                TakenBy = imageModel.TakenBy,
+                DeleteAt = DateTime.Now.AddSeconds(30)
+            };
+
+            Mat mat = Base64Helper.ToMat(imageModel.AsBase64);
+            ImageHelper.SaveImage(mat, path);
+
+            Task.Run(() =>
+            {
+                ImageHelper.DrawMarkers(mat, path);
+            });
+
+            _context.AddImage(image);
+            _context.SaveChanges();
             return Ok(image);
         }
     }

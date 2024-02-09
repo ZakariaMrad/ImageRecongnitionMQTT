@@ -1,11 +1,11 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\Image-0b4bd175-cef7-4c14-82ee-0a3fb9239914.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\318dee93-6980-4da8-8a44-25f70eff218b.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>ImageRecongnitionMQTT</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/ImageRecongnitionMQTT</BasePath>
-      <RelativePath>images/Image-0b4bd175-cef7-4c14-82ee-0a3fb9239914.png</RelativePath>
+      <RelativePath>images/318dee93-6980-4da8-8a44-25f70eff218b.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -14,14 +14,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\Image-0b4bd175-cef7-4c14-82ee-0a3fb9239914.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\318dee93-6980-4da8-8a44-25f70eff218b.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\Image-84e57235-5d51-49b6-a921-8b680f95e852.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\5b6f4b0d-eb17-472d-ae76-b4d4f36869a2.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>ImageRecongnitionMQTT</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/ImageRecongnitionMQTT</BasePath>
-      <RelativePath>images/Image-84e57235-5d51-49b6-a921-8b680f95e852.png</RelativePath>
+      <RelativePath>images/5b6f4b0d-eb17-472d-ae76-b4d4f36869a2.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -30,14 +30,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\Image-84e57235-5d51-49b6-a921-8b680f95e852.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\5b6f4b0d-eb17-472d-ae76-b4d4f36869a2.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\Image-89a1b023-8c7f-465e-859f-67c43e432176.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\5d0e1bae-dc8e-4119-bdb2-ae8a469eaee9.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>ImageRecongnitionMQTT</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/ImageRecongnitionMQTT</BasePath>
-      <RelativePath>images/Image-89a1b023-8c7f-465e-859f-67c43e432176.png</RelativePath>
+      <RelativePath>images/5d0e1bae-dc8e-4119-bdb2-ae8a469eaee9.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -46,14 +46,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\Image-89a1b023-8c7f-465e-859f-67c43e432176.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\5d0e1bae-dc8e-4119-bdb2-ae8a469eaee9.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\Image-b79c16cd-d598-4cb1-badb-95557f83757f.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\5db1a748-d477-47e9-87fd-06cd9a59f43c.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>ImageRecongnitionMQTT</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/ImageRecongnitionMQTT</BasePath>
-      <RelativePath>images/Image-b79c16cd-d598-4cb1-badb-95557f83757f.png</RelativePath>
+      <RelativePath>images/5db1a748-d477-47e9-87fd-06cd9a59f43c.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -62,14 +62,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\Image-b79c16cd-d598-4cb1-badb-95557f83757f.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\5db1a748-d477-47e9-87fd-06cd9a59f43c.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\Image-d6033778-b01d-4ca0-9b4f-b1b030581e07.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\a9548271-84f0-4460-80f4-c84e49267942.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>ImageRecongnitionMQTT</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/ImageRecongnitionMQTT</BasePath>
-      <RelativePath>images/Image-d6033778-b01d-4ca0-9b4f-b1b030581e07.png</RelativePath>
+      <RelativePath>images/a9548271-84f0-4460-80f4-c84e49267942.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -78,14 +78,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\Image-d6033778-b01d-4ca0-9b4f-b1b030581e07.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\a9548271-84f0-4460-80f4-c84e49267942.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\Image-f09550d7-632c-4439-aff9-d988efcb6bdb.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\ff72254c-5d2a-40a6-9642-727708d4c875.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>ImageRecongnitionMQTT</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/ImageRecongnitionMQTT</BasePath>
-      <RelativePath>images/Image-f09550d7-632c-4439-aff9-d988efcb6bdb.png</RelativePath>
+      <RelativePath>images/ff72254c-5d2a-40a6-9642-727708d4c875.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -94,7 +94,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\Image-f09550d7-632c-4439-aff9-d988efcb6bdb.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\ff72254c-5d2a-40a6-9642-727708d4c875.jpg))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

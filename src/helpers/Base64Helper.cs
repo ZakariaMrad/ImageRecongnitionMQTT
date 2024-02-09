@@ -1,65 +1,44 @@
 using System;
 using System.IO;
+using System.Drawing;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using Emgu.CV.CvEnum;
 
 public static class Base64Helper
 {
-    public static bool SaveFileFromBase64(string base64String, string filePath)
+    public static Mat ToMat(string base64)
     {
-        try
+        byte[] bytes = Convert.FromBase64String(base64);
+        using (MemoryStream ms = new MemoryStream(bytes))
         {
-            string base64 = base64String;
-            if (base64.StartsWith("data:"))
-            {
-                base64 = base64.Substring(base64.IndexOf(",") + 1);
-            }
-            byte[] fileBytes = Convert.FromBase64String(base64);
-            File.WriteAllBytes(filePath, fileBytes);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error creating file: {ex.Message}");
-            return false;
+            Mat image = new Mat();
+            CvInvoke.Imdecode(bytes, ImreadModes.Color, image);
+            return image;
         }
     }
 
-    public static string GetFileExtensionFromBase64(string base64String)
+    public static string MatToBase64(Mat image)
     {
-        string[] parts = base64String.Split(',');
-        string data = parts[0];
-        string extension = string.Empty;
-
-        if (data.Contains("/"))
+        // Ensure we have a valid image
+        if (image == null || image.IsEmpty)
         {
-            string mimeType = data.Split(':')[1].Split(';')[0];
-            extension = mimeType.Split('/')[1];
+            throw new ArgumentException("Invalid image", nameof(image));
         }
-        else
+
+        // Convert the Mat image to a Bitmap
+        Bitmap bitmap = image.ToBitmap();
+
+        // Save the bitmap to a MemoryStream
+        using (MemoryStream memoryStream = new MemoryStream())
         {
-            extension = parts[0].Split('/')[1].Split(';')[0];
+            bitmap.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+
+            // Convert the MemoryStream to a byte array
+            byte[] imageBytes = memoryStream.ToArray();
+
+            // Convert the byte array to a Base64 string
+            return Convert.ToBase64String(imageBytes);
         }
-        return extension;
     }
-
-    public static string GetBase64FromFile(string filePath)
-    {
-        byte[] fileBytes = File.ReadAllBytes(filePath);
-        return Convert.ToBase64String(fileBytes);
-    }
-
-    public static byte[] GetBytesFromBase64(string base64String)
-    {
-        string base64 = base64String;
-        if (base64.StartsWith("data:"))
-        {
-            base64 = base64.Substring(base64.IndexOf(",") + 1);
-        }
-        return Convert.FromBase64String(base64);
-    }
-
-    public static byte[] GetBytesFromFile(string filePath)
-    {
-        return File.ReadAllBytes(filePath);
-    }
-    
 }

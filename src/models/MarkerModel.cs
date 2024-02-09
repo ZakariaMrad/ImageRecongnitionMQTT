@@ -3,14 +3,13 @@ using Emgu.CV.Util;
 public class MarkerModel
 {
     public int Id { get; set; }
-    public List<MarkerPosition> Markers { get; set; } = [];
+    public Position Position { get; set; } = new Position();
 
     public MarkerModel(int id, VectorOfPointF corners)
     {
         Id = id;
-        for (int i = 0; i < corners.Size; i++)
-        {
-            Markers.Add(new MarkerPosition { X = (int)corners[i].X, Y = (int)corners[i].Y });
-        }
+        //Position is the center of the marker
+        Position.X = (int)(corners[0].X + corners[1].X + corners[2].X + corners[3].X) / 4;
+        Position.Y = (int)(corners[0].Y + corners[1].Y + corners[2].Y + corners[3].Y) / 4;
     }
 }

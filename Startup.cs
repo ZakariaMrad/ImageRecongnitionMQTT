@@ -1,9 +1,5 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using ImageRecognitionMQTT;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 public class Startup
 {
@@ -18,15 +14,28 @@ public class Startup
     {
         // Add services and dependencies here
         // For example:
-        services.AddDbContext<ImageContext>(opt =>
-            opt.UseInMemoryDatabase("MarkerList"));
+        services.AddDbContext<ImageRecognitionContext>(opt =>
+            opt.UseInMemoryDatabase("ImageRecognitionContext")
+        );
         services.AddControllers();
-        services.AddScoped<MarkerDetectionService>();
+        // services.AddScoped<MarkerDetectionService>();
+        // services.AddScoped<BeamDetectionService> ();
 
 
         // Add other services and dependencies as needed
 
         // Configure other services as needed
+        services.AddCors(options =>
+        {
+            options.AddPolicy(
+                "AllowMyOrigin",
+                builder =>
+                    builder
+                        .WithOrigins("*") // Allows requests from this origin
+                        .AllowAnyMethod() // Allows all HTTP methods
+                        .AllowAnyHeader()
+            ); // Allows all headers
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,6 +48,7 @@ public class Startup
         {
             // Configure production environment settings
         }
+    app.UseCors("AllowMyOrigin"); // Apply the CORS policy
 
         app.UseRouting();
 
