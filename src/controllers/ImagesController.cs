@@ -64,9 +64,9 @@ namespace ImageRecognitionMQTT.Controllers
             ImageHelper.SaveImage(mat, path);
 
 
-            _beamDetectionService.HandleBeams(mat);
-            ImageHelper.DrawMarkers(mat, path);
-            ImageHelper.DrawBeamMarkers(mat, path);
+            // mat = ImageHelper.DrawMarkers(mat, path);
+            // mat = ImageHelper.DrawBeamMarkers(mat, path);
+            _beamDetectionService.HandleBeams(mat, path);
 
             _context.AddImage(image);
             _context.SaveChanges();

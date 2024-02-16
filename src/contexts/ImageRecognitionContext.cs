@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 
 public class ImageRecognitionContext : DbContext
@@ -118,24 +119,8 @@ public class ImageRecognitionContext : DbContext
             CreatedAt = b.CreatedAt,
             UpdatedAt = b.UpdatedAt,
             CanBeSaved = b.CanBeSaved,
-            Corners = b.Corners.Select(c => new BeamCornerModel
-            {
-                IdBeamCorner = c.IdBeamCorner,
-                Position = c.Position,
-            }).ToList()
         })
         .ToList();
     }
 
-    public void UpdateBeam(BeamModel beam)
-    {
-        var existingBeam = Beams.FirstOrDefault(b => b.IdBeam == beam.IdBeam);
-        if (existingBeam != null)
-        {
-            Beams.Remove(existingBeam);
-            SaveChanges();
-        }
-        Beams.Add(beam);
-        SaveChanges();
-    }
 }

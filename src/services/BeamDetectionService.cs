@@ -1,11 +1,14 @@
 using System.Drawing;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using Emgu.CV;
 using Emgu.CV.Aruco;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using ImageRecognitionMQTT.Enums;
-using MediaToolkit.Util;
+using System.Drawing.Drawing2D;
+
 
 
 public class BeamDetectionService
@@ -17,7 +20,7 @@ public class BeamDetectionService
         _context = context;
     }
 
-    public void HandleBeams(Mat mat)
+    public void HandleBeams(Mat mat, string path)
     {
         var markers = MarkerDetectionHelper.GetMarkersAsModel(mat);
         var beamMarkers = MarkerDetectionHelper.GetBeamMarkersAsModel(mat);
@@ -27,10 +30,13 @@ public class BeamDetectionService
             Console.WriteLine("No beams found in the image");
             return;
         }
+
         
+
         beams.ForEach(beam =>
         {
-            updateBeam(beam, beamMarkers,  markers);
+            Console.WriteLine("Updating beam # " + beam.IdBeam);
+            updateBeam(beam, beamMarkers, markers, mat, path);
 
         });
 
@@ -38,31 +44,30 @@ public class BeamDetectionService
 
     }
 
-    private void updateBeam(BeamModel beam, List<MarkerModel> beamMarkers, List<MarkerModel> markers)
+    private void updateBeam(BeamModel beam, List<MarkerModel> beamMarkers, List<MarkerModel> markers, Mat mat, string path)
     {
         beam.UpdatedAt = DateTime.Now;
-        var cornerMarkers = beamMarkers.Where(marker => marker.IdMarker == beam.IdBeam).Select(marker => marker.ToCorner()).ToList();
-        if (cornerMarkers.Count != 4) {
+        var cornerMarkers = beamMarkers.Where(marker => marker.IdMarker == beam.IdBeam).ToList();
+        if (cornerMarkers.Count != 4)
+        {
             Console.WriteLine("Beam # " + beam.IdBeam + " has more or less than 4 markers");
-            _context.UpdateBeam(beam);
             return;
         }
-        Console.WriteLine("Beam # " + beam.IdBeam + " has 4 markers");
-        beam.Corners.AddRange(cornerMarkers);
-        beam = addItems(beam, markers);
-        _context.UpdateBeam(beam);
 
+        beam = addItems(beam, cornerMarkers, markers, mat, path);
     }
 
-    private BeamModel addItems(BeamModel beam, List<MarkerModel> markers)
+    private BeamModel addItems(BeamModel beam, List<MarkerModel> cornerMarkers, List<MarkerModel> markers, Mat mat, string path)
     {
         markers.ForEach(marker =>
         {
-            if (GeometryHelper.IsPointInCorners(marker, beam.Corners))
+            if (GeometryHelper.IsPointInCorners(marker, cornerMarkers, mat, path))
             {
                 Console.WriteLine("Marker # " + marker.IdMarker + " is inside beam # " + beam.IdBeam);
-            } else {
-                Console.WriteLine("Marker # " + marker.IdMarker + " is outside beam # " + beam.IdBeam);
+            }
+            else
+            {
+                // Console.WriteLine("Marker # " + marker.IdMarker + " is outside beam # " + beam.IdBeam);
             }
         });
 

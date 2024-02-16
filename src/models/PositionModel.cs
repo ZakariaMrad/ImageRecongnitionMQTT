@@ -10,6 +10,7 @@ public class PositionModel
 
     public Point ToPoint()
     {
-        return new Point(X, Y);
+        var point = new Point(X, Y);
+        return point;
     }
 }

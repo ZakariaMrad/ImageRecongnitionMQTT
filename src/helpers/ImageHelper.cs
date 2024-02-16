@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks.Dataflow;
 using Emgu.CV;
 using Emgu.CV.Aruco;
 using Emgu.CV.CvEnum;
@@ -34,23 +35,31 @@ public static class ImageHelper
         return CvInvoke.Imread(path, ImreadModes.Color);
     }
 
-    public static void DrawMarkers(Mat mat, string path)
+    public static Mat DrawMarkers(Mat mat, string path)
     {
         var markers = MarkerDetectionHelper.GetMarkersAsModel(mat);
         foreach (var marker in markers)
         {
-            CvInvoke.Circle(mat, marker.Position.ToPoint(), 30, new MCvScalar(5, 13, 163), 10);
+            CvInvoke.Circle(mat, marker.Position.ToPoint(), 30, new MCvScalar(5, 13, 163), 1);
+            //write id under the marker
+            CvInvoke.PutText(mat, marker.IdMarker.ToString(), new Point(marker.Position.X -25, marker.Position.Y + 50), FontFace.HersheySimplex, 1, new MCvScalar(5, 13, 163), 1);
         }
         SaveImage(mat, path);
+        return mat;
     }
-    public static void DrawBeamMarkers(Mat mat, string path)
+
+    public static Mat DrawBeamMarkers(Mat mat, string path)
     {
         var markers = MarkerDetectionHelper.GetBeamMarkersAsModel(mat);
         foreach (var marker in markers)
         {
-            CvInvoke.Circle(mat, marker.Position.ToPoint(), 30, new MCvScalar(21, 163, 5), 10);
+            CvInvoke.Circle(mat, marker.Position.ToPoint(), 30, new MCvScalar(21, 163, 5), 1);
+            CvInvoke.PutText(mat, marker.IdMarker.ToString(), new Point(marker.Position.X -25, marker.Position.Y + 50), FontFace.HersheySimplex, 1, new MCvScalar(5, 13, 163), 1);
+
         }
+
         SaveImage(mat, path);
+        return mat;
     }
 
     public static ImageModel GetBase64(ImageModel image)

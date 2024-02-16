@@ -10,6 +10,5 @@ public class BeamModel
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
     public List<ItemModel> Items { get; set; } = new List<ItemModel>();
-    public List<BeamCornerModel> Corners { get; set; } = [];
     public bool? CanBeSaved { get; set; }
 }

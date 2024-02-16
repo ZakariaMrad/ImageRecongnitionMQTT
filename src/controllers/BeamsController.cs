@@ -56,8 +56,7 @@ namespace ImageRecognitionMQTT.Controllers
                 Name = beamModel.Name,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
-                Items = [],
-                Corners = []
+                Items = []
             };
 
             var (error, data) = _context.AddBeam(beam);
