@@ -365,3 +365,4 @@ D:\1839783\ImageRecongnitionMQTT\bin\Debug\net8.0\runtimes\win\lib\net6.0\System
 D:\1839783\ImageRecongnitionMQTT\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\1839783\ImageRecongnitionMQTT\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\1839783\ImageRecongnitionMQTT\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\Zakar\CodingMac\ImageRecongnitionMQTT\bin\Debug\net8.0\Newtonsoft.Json.dll

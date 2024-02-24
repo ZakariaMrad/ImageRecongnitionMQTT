@@ -30,22 +30,28 @@ namespace ImageRecognitionMQTT.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateEsp32([FromBody] Esp32Model esp32)
+        public IActionResult CreateEsp32([FromBody] Esp32Model esp32Model)
         {
-            if (esp32==null || esp32.MacAddress == "")
+            if (esp32Model==null || esp32Model.MacAddress == "")
             {
                 return BadRequest("MacAddress is required.");
             }
-            esp32.CreatedAt = DateTime.Now;
-            esp32.UpdatedAt = DateTime.Now;
-            esp32.Token = Guid.NewGuid().ToString();
-            esp32.IdEsp32 = Guid.NewGuid().ToString();
+            var IdEsp32 = Guid.NewGuid().ToString();
+            var esp32 = new Esp32Model
+            {
+                IdEsp32 = IdEsp32,
+                MacAddress = esp32Model.MacAddress,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Token = Guid.NewGuid().ToString(),
+                Href = $"{Constants.ESP32S_URL}/{IdEsp32}"
+            };
             var (error, data) = _context.AddEsp32(esp32);
             if (error != null)
             {
                 return BadRequest(error);
             }
-            return Ok(esp32);
+            return Ok(data);
         }
     }
 }

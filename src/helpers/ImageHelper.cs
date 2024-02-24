@@ -40,9 +40,9 @@ public static class ImageHelper
         var markers = MarkerDetectionHelper.GetMarkersAsModel(mat);
         foreach (var marker in markers)
         {
-            CvInvoke.Circle(mat, marker.Position.ToPoint(), 30, new MCvScalar(5, 13, 163), 1);
+            CvInvoke.Circle(mat, marker.Position.ToPoint(), 1, new MCvScalar(5, 13, 163), 1);
             //write id under the marker
-            CvInvoke.PutText(mat, marker.IdMarker.ToString(), new Point(marker.Position.X -25, marker.Position.Y + 50), FontFace.HersheySimplex, 1, new MCvScalar(5, 13, 163), 1);
+            CvInvoke.PutText(mat, marker.IdMarker.ToString(), new Point(marker.Position.X -25, marker.Position.Y + 50), FontFace.HersheySimplex, 0.5, new MCvScalar(5, 13, 163), 1);
         }
         SaveImage(mat, path);
         return mat;
@@ -53,8 +53,8 @@ public static class ImageHelper
         var markers = MarkerDetectionHelper.GetBeamMarkersAsModel(mat);
         foreach (var marker in markers)
         {
-            CvInvoke.Circle(mat, marker.Position.ToPoint(), 30, new MCvScalar(21, 163, 5), 1);
-            CvInvoke.PutText(mat, marker.IdMarker.ToString(), new Point(marker.Position.X -25, marker.Position.Y + 50), FontFace.HersheySimplex, 1, new MCvScalar(5, 13, 163), 1);
+            CvInvoke.Circle(mat, marker.Position.ToPoint(), 1, new MCvScalar(21, 163, 5), 1);
+            CvInvoke.PutText(mat, marker.IdMarker.ToString(), new Point(marker.Position.X -25, marker.Position.Y + 50), FontFace.HersheySimplex, 0.5, new MCvScalar(5, 13, 163), 1);
 
         }
 

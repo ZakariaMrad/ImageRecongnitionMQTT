@@ -16,6 +16,7 @@ namespace ImageRecognitionMQTT
                 .ToString();
 
             CreateHostBuilder(args, myIP).Build().Run();
+            Constants.BASE_URL = $"http://{myIP}:5000";
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args, string myIP) =>

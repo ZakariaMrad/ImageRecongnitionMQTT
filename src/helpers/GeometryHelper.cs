@@ -29,7 +29,7 @@ public static class GeometryHelper
             //draw the polygon on the image
             for (int i = 0; i < polygonPoints.Count; i++)
             {
-                //CvInvoke.Line(mat, polygonPoints[i], polygonPoints[(i + 1) % polygonPoints.Count], new MCvScalar(5, 13, 163), 1);
+                CvInvoke.Line(mat, polygonPoints[i], polygonPoints[(i + 1) % polygonPoints.Count], new MCvScalar(5, 13, 163), 1);
             }
             ImageHelper.SaveImage(mat, path);
             return polygon.IsVisible(testPoint);

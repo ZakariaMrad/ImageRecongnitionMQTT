@@ -16,16 +16,19 @@ public class Startup
         // Add services and dependencies here
         // For example:
         services.AddDbContext<ImageRecognitionContext>(opt =>
-            opt.UseInMemoryDatabase("ImageRecognitionContext")
+            opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
         );
         services.AddControllers();
         // services.AddScoped<MarkerDetectionService>();
         services.AddScoped<BeamDetectionService>();
 
-        services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-});
+        services
+            .AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.DefaultIgnoreCondition =
+                    JsonIgnoreCondition.WhenWritingNull;
+            });
         // Add other services and dependencies as needed
 
         // Configure other services as needed

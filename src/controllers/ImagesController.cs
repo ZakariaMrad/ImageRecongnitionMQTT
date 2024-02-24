@@ -57,16 +57,16 @@ namespace ImageRecognitionMQTT.Controllers
                 Path = path,
                 CreatedAt = DateTime.Now,
                 TakenBy = imageModel.TakenBy,
-                DeleteAt = DateTime.Now.AddMinutes(5)
+                Href = $"{Constants.IMAGES_URL}/{IdImage}"
             };
 
             Mat mat = Base64Helper.ToMat(imageModel.AsBase64);
             ImageHelper.SaveImage(mat, path);
 
 
-            // mat = ImageHelper.DrawMarkers(mat, path);
-            // mat = ImageHelper.DrawBeamMarkers(mat, path);
-            _beamDetectionService.HandleBeams(mat, path);
+            mat = ImageHelper.DrawMarkers(mat, path);
+            mat = ImageHelper.DrawBeamMarkers(mat, path);
+            _beamDetectionService.HandleBeams(mat, path, IdImage);
 
             _context.AddImage(image);
             _context.SaveChanges();

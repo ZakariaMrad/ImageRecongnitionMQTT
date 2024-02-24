@@ -1,15 +1,13 @@
 using System.Drawing;
-using System.Text.Json.Serialization;
+using System.Drawing.Drawing2D;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Emgu.CV;
 using Emgu.CV.Aruco;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using ImageRecognitionMQTT.Enums;
-using System.Drawing.Drawing2D;
-
-
 
 public class BeamDetectionService
 {
@@ -20,7 +18,7 @@ public class BeamDetectionService
         _context = context;
     }
 
-    public void HandleBeams(Mat mat, string path)
+    public void HandleBeams(Mat mat, string path, string IdImage)
     {
         var markers = MarkerDetectionHelper.GetMarkersAsModel(mat);
         var beamMarkers = MarkerDetectionHelper.GetBeamMarkersAsModel(mat);
@@ -31,39 +29,50 @@ public class BeamDetectionService
             return;
         }
 
-        
-
         beams.ForEach(beam =>
         {
             Console.WriteLine("Updating beam # " + beam.IdBeam);
-            updateBeam(beam, beamMarkers, markers, mat, path);
-
+            updateBeam(beam, beamMarkers, markers, mat, path, IdImage);
         });
-
-
-
     }
 
-    private void updateBeam(BeamModel beam, List<MarkerModel> beamMarkers, List<MarkerModel> markers, Mat mat, string path)
+    private void updateBeam(
+        BeamModel beam,
+        List<MarkerModel> beamMarkers,
+        List<MarkerModel> markers,
+        Mat mat,
+        string path,
+        string IdImage
+    )
     {
-        beam.UpdatedAt = DateTime.Now;
-        var cornerMarkers = beamMarkers.Where(marker => marker.IdMarker == beam.IdBeam).ToList();
+        var cornerMarkers = beamMarkers.Where(marker => marker.IdMarker == beam.MarkerValue).ToList();
         if (cornerMarkers.Count != 4)
         {
             Console.WriteLine("Beam # " + beam.IdBeam + " has more or less than 4 markers");
             return;
         }
-
-        beam = addItems(beam, cornerMarkers, markers, mat, path);
+        beam.UpdatedAt = DateTime.Now;
+        _context.RemoveItemsFromBeam(beam.IdBeam);
+        beam = addItems(beam, cornerMarkers, markers, mat, path, IdImage);
     }
 
-    private BeamModel addItems(BeamModel beam, List<MarkerModel> cornerMarkers, List<MarkerModel> markers, Mat mat, string path)
+    private BeamModel addItems(
+        BeamModel beam,
+        List<MarkerModel> cornerMarkers,
+        List<MarkerModel> markers,
+        Mat mat,
+        string path,
+        string IdImage
+    )
     {
         markers.ForEach(marker =>
         {
             if (GeometryHelper.IsPointInCorners(marker, cornerMarkers, mat, path))
             {
-                Console.WriteLine("Marker # " + marker.IdMarker + " is inside beam # " + beam.IdBeam);
+                Console.WriteLine(
+                    "Marker # " + marker.IdMarker + " is inside beam # " + beam.IdBeam
+                );
+                _context.AddItemToBeam(beam.IdBeam, marker.IdMarker, IdImage);
             }
             else
             {
@@ -81,8 +90,8 @@ public class BeamDetectionService
         {
             return false;
         }
-        beams = beams.Where(beam => markers.Any(marker => marker.IdMarker == beam.IdBeam)).ToList();
+        System.Console.WriteLine("Beams found: " + beams[0].MarkerValue);
+        beams = beams.Where(beam => markers.Any(marker => marker.IdMarker == beam.MarkerValue)).ToList();
         return beams.Count > 0;
     }
-
 }

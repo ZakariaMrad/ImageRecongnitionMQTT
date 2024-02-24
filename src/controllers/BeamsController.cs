@@ -1,14 +1,13 @@
-using Microsoft.AspNetCore.Mvc;
-using Emgu.CV;
-using Emgu.CV.Util;
-using Emgu.CV.CvEnum;
-using Emgu.CV.Aruco;
 using System.Drawing;
+using Emgu.CV;
+using Emgu.CV.Aruco;
+using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using Emgu.CV.Util;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ImageRecognitionMQTT.Controllers
 {
-
     [ApiController]
     [Route("api/[controller]")]
     public class BeamsController : ControllerBase
@@ -34,7 +33,7 @@ namespace ImageRecognitionMQTT.Controllers
         [HttpGet("{id}")]
         public IActionResult GetBeam(string id)
         {
-            var (error,beam) = _context.GetBeamByIdOrName(id);
+            var (error, beam) = _context.GetBeamByIdOrName(id);
             if (error != null)
             {
                 return NotFound(error);
@@ -45,18 +44,29 @@ namespace ImageRecognitionMQTT.Controllers
         [HttpPost]
         public IActionResult CreateBeam([FromBody] BeamModel beamModel)
         {
-            if (beamModel.IdBeam == "" || beamModel.Name == "")
+            if (beamModel.Name == "")
             {
-                return BadRequest("IdBeam and Name are required.");
+                return BadRequest("Name is required.");
             }
+
+            var markerValue = "0";
+            while (_context.Beams.Any(b => b.MarkerValue == markerValue))
+            {
+                markerValue = (int.Parse(markerValue) + 1).ToString();
+            }
+            var IdBeam = Guid.NewGuid().ToString();
 
             var beam = new BeamModel
             {
-                IdBeam = beamModel.IdBeam,
+                IdBeam = IdBeam,
+                MarkerValue = markerValue,
+                MarkerValueBase64 = ProcessHelper.DrawBeamArucoMarkerAsBase64(markerValue),
                 Name = beamModel.Name,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
-                Items = []
+                Items = [],
+                CanBeSaved = true,
+                Href = $"{Constants.BEAMS_URL}/{IdBeam}"
             };
 
             var (error, data) = _context.AddBeam(beam);

@@ -9,4 +9,5 @@ public class ImageModel
     public DateTime DeleteAt { get; set; }
     public string TakenBy { get; set; } = "";
     public string? AsBase64 { get; set; }
+    public string Href { get; set; } = "";
 }
